@@ -1,3 +1,6 @@
 Contraste
 
-Mise à l'échelle
+Misee à l'échelle
+
+Niveau de gris
+

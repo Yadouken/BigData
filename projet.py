@@ -5,7 +5,14 @@ import matplotlib.pyplot as plt
 train_data = loadmat('train_32x32.mat')
 test_data = loadmat('test_32x32.mat')
 
-image_idx = 15
-print('Label:', train_data['y'][image_idx])
-plt.imshow(train_data['X'][:, :, :, image_idx])
-plt.show()
+
+
+for i in range (20):
+	plt.imshow(train_data['X'][:, :, :, i])
+	plt.show()
+
+
+def changeContraste(index):
+	image = train_data['X'][:,:,:,index]
+	
+
