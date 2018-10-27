@@ -2,11 +2,40 @@ import numpy as np
 from scipy.io import loadmat
 import matplotlib.pyplot as plt
 
-train_data = loadmat('train_32x32.mat')
-test_data = loadmat('test_32x32.mat')
-
 #Images de taille n*n
 n = 32
+
+def generateTrainingData():
+	train_data = loadmat("train_32x32.mat")
+	test_data = loadmat("test_32x32.mat")
+
+	return train_data, test_data
+
+# Affche une image
+def showImage(data, id):
+	print("Label:", data["y"][id])
+	plt.imshow(data["X"][:, :, :, id])
+	plt.show()
+
+# Affiche une image a partir de laliste triee
+def showImageClass(data):
+	plt.imshow(data[:, :, :])
+	plt.show()
+
+# Retourne les données triées par classe
+def splitData(data):
+	classes = defaultdict(list)
+
+	for i in range(0, len(data["y"])):
+		classes[data["y"][i][0]].append(data["X"][:, :, :, i])
+
+	return classes
+
+if __name__=="__main__":
+	train_data, test_data = generateTrainingData()
+
+	resultat = (train_data['X'][:,:,:,0]).flatten()
+	print(len(resultat))
 
 """for i in range (20):
 	plt.imshow(train_data['X'][:, :, :, i])
@@ -43,5 +72,3 @@ def Contraste(image):
 resultat = np.sqrt(((train_data['X'][:,:,:,0] - train_data['X'][:,:,:,1])**2).sum(-1))
 print(resultat)
 """
-resultat = (train_data['X'][:,:,:,0]).flatten()
-print(len(resultat))
