@@ -38,3 +38,12 @@ def DeterminerClasse(image):
 	#Récupération des distances entre chaque représentant
 	L = LDistances(image)
 	return L.index(min(L))
+
+def calculBarycentre(data):
+	representants = dict()
+
+	for i in range(1, 11):
+		representants[i-1] = np.average(data[i], axis=0)
+	print(representants[0])
+	showImageClass(representants[0])
+	return representants
