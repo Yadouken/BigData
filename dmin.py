@@ -6,9 +6,10 @@ from math import sqrt
 
 #Images de taille n*n
 n = 32
+lentrain = 73256
 
 def generateTrainingData():
-	train_data = loadmat("train_32x32_cleaned.mat")
+	train_data = loadmat("train_32x32.mat")
 	test_data = loadmat("test_32x32.mat")
 	return train_data, test_data
 
@@ -49,8 +50,9 @@ def showImageClass(data):
 #representants[i] = vecteur RGB représentant la classe i
 def calculBarycentre(data):
 	representants = dict()
-	for i in range(1, 11):
-		representants[i-1] = np.average(data[i], axis=0)
+	representants[0] = np.average(data[10], axis=0)
+	for i in range(1, 10):
+		representants[i] = np.average(data[i], axis=0)
 	return representants
 
 def splitData(data):
@@ -65,12 +67,16 @@ if __name__=="__main__":
 	train_data, test_data = generateTrainingData()
 	orderedData = splitData(train_data)
 	representants = calculBarycentre(orderedData)
+
 	#print(DeterminerClasse(train_data["X"][:, :, :, 6]))
 	#plt.imshow(train_data["X"][:, :, :, 6])
 	#plt.show()
-	compteur = 0
-	for i in range(30000,35000):
-		if(DeterminerClasse(train_data["X"][:, :, :, i], representants)==train_data["y"][i][0]):
-			compteur+=1
-	res = (compteur/5000)*100
-	print("Pourcentage d'images bonne classe : ", res)
+	# compteur = 0
+	# temp = 0
+	# for i in range(lentrain):
+	# 	print("Image ",temp)
+	# 	temp+=1
+	# 	if(DeterminerClasse(train_data["X"][:, :, :, i], representants)==train_data["y"][i][0]):
+	# 		compteur+=1
+	# res = (compteur/lentrain)*100
+	# print("Pourcentage d'images bonne classe : ", res)
