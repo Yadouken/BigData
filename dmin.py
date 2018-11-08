@@ -11,8 +11,8 @@ def generateTrainingData():
 	test_data = loadmat("test_32x32.mat")
 	return train_data, test_data
 
-#Calcul de la distance euclidienne entre deux vecteurs RGB 
-#renvoit le résultat
+'''Calcul de la distance euclidienne entre deux vecteurs RGB 
+	renvoie le résultat'''
 def distanceEuclidienne(X,Y):
 	#Flatten : applati le vecteur de taille (32,32,3) 
 	#devient une liste
@@ -21,20 +21,20 @@ def distanceEuclidienne(X,Y):
 	res = np.dot(a,b)
 	return res
 
-#Input : image dont on veut connaitre la classe
-#Distance euclidienne avec chaque représentants de classe
-#Retourne la liste des distances rangés dans l'ordre
-#L[i] = distance entre image et representant classe i (i de 0 à 9) 
-def LDistances(image):
+'''Input : image dont on veut connaitre la classe
+Distance euclidienne avec chaque représentants de classe
+Retourne la liste des distances rangés dans l'ordre
+L[i] = distance entre image et representant classe i (i de 0 à 9)''' 
+def LDistances(image, representants):
 	L = []
 	for i in range(len(representants)):
 		resultat = distanceEuclidienne(image, representants[i])
 		L.append(resultat)
 	return L
 
-def DeterminerClasse(image):
+def DeterminerClasse(image, representants):
 	#Récupération des distances entre chaque représentant
-	L = LDistances(image)
+	L = LDistances(image, representants)
 	return L.index(min(L))
 
 def showImageClass(data):
@@ -57,10 +57,17 @@ def splitData(data):
 
 	return classes
 
+
+def test(data):
+	for i in range(len(data)):
+		print("bite")
+	return 0
+
 if __name__=="__main__":
 	train_data, test_data = generateTrainingData()
 	orderedData = splitData(train_data)
 	representants = calculBarycentre(orderedData)
-	print(DeterminerClasse(test_data["X"][:, :, :, 25229]))
+	print(DeterminerClasse(test_data["X"][:, :, :, 3], representants))
+	print(test_data["y"][3])
 	plt.imshow(test_data["X"][:, :, :, 25229])
 	plt.show()
