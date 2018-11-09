@@ -1,9 +1,9 @@
 # **Projet Big Data**
   
-**dmin**
+## **dmin**
 ##### Classifieur à distance minimale
 **egalisation/binarisation**
 ##### pré traitement des images
-**acp**
+## **acp**
 ##### réduction de la dimension des images
   
