@@ -9,8 +9,8 @@ n = 32
 lentrain = 73256
 
 def generateTrainingData():
-	train_data = loadmat("train_32x32.mat")
-	test_data = loadmat("test_32x32.mat")
+	train_data = loadmat("train_32x32_cleaned.mat")
+	test_data = loadmat("test_32x32_cleaned.mat")
 	return train_data, test_data
 
 '''Calcul de la distance euclidienne entre deux vecteurs RGB 
@@ -20,11 +20,8 @@ def distanceEuclidienne(X,Y):
 	#devient une liste
 	a = X.flatten()
 	b = Y.flatten()
-	c = np.zeros(len(a))
-	for i in range(len(c)):
-		c[i] = b[i]-a[i]
-	res = sqrt(np.dot(c,c))
-	return res
+	c = b-a
+	return sqrt(np.dot(c,c))
 
 def distanceEuclidienne2(X,Y):
 	#Flatten : applati le vecteur de taille (32,32,3) 
@@ -45,7 +42,7 @@ def distanceEuclidienne2(X,Y):
 def LDistances(image, representants):
 	L = []
 	for i in range(len(representants)):
-		resultat = distanceEuclidienne2(image, representants[i])
+		resultat = distanceEuclidienne(image, representants[i])
 		L.append(resultat)
 	return L
 
@@ -85,12 +82,10 @@ if __name__=="__main__":
 	#plt.imshow(train_data["X"][:, :, :, 6])
 	#plt.show()
 	compteur = 0
-	# temp = 0
 	for i in range(lentrain):
-	  	print(i)
-	# # 	temp+=1
-	  	if(DeterminerClasse(train_data["X"][:, :, :, i], representants)==train_data["y"][i][0]):
-	  		compteur+=1
+		print('Image ',i)
+		if(DeterminerClasse(train_data["X"][:, :, :, i], representants)==train_data["y"][i][0]):
+			compteur+=1
 	res = (compteur/lentrain)*100
 	print("Pourcentage d'images bonne classe : ", res)
 
