@@ -6,7 +6,8 @@ from math import sqrt
 
 #Images de taille n*n
 n = 32
-lentrain = 73256
+lentrain = 73257
+lentest = 26032
 
 def generateTrainingData():
 	train_data = loadmat("train_32x32_cleaned.mat")
@@ -22,17 +23,6 @@ def distanceEuclidienne(X,Y):
 	b = Y.flatten()
 	c = b-a
 	return sqrt(np.dot(c,c))
-
-def distanceEuclidienne2(X,Y):
-	#Flatten : applati le vecteur de taille (32,32,3) 
-	#devient une liste
-	a = X.flatten()
-	b = Y.flatten()
-	c = np.zeros(len(a))
-	for i in range(len(c)):
-		c[i] = (b[i]-a[i])*(b[i]-a[i])
-	return sqrt(sum(c))
-
 
 #Input : image dont on veut connaitre la classe
 #Distance euclidienne avec chaque représentants de classe
@@ -82,10 +72,10 @@ if __name__=="__main__":
 	#plt.imshow(train_data["X"][:, :, :, 6])
 	#plt.show()
 	compteur = 0
-	for i in range(lentrain):
+	for i in range(lentest):
 		print('Image ',i)
-		if(DeterminerClasse(train_data["X"][:, :, :, i], representants)==train_data["y"][i][0]):
+		if(DeterminerClasse(test_data["X"][:, :, :, i], representants)==test_data["y"][i][0]):
 			compteur+=1
-	res = (compteur/lentrain)*100
+	res = (compteur/lentest)*100
 	print("Pourcentage d'images bonne classe : ", res)
 

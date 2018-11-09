@@ -8,8 +8,8 @@ test_data = loadmat('test_32x32.mat')
 #Images de taille n*n
 n = 32
 #Longeurs des données d'entraînement et de test
-lentrain = 73256
-lentest = 26031
+lentrain = 73257
+lentest = 26032
 
 def sump(l,r):
 	res = 0
