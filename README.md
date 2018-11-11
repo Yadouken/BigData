@@ -3,7 +3,9 @@
 ## **dmin**
 ##### Classifieur à distance minimale
 ## **egalisation/binarisation**
-##### pré traitement des images
+##### Pré traitement des images
 ## **acp**
-##### réduction de la dimension des images
+##### Réduction de la dimension des images
+## **svm**
+##### Classifieur Support Vector Machines
   
