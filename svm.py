@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from sklearn.svm import SVC  
 from sklearn.metrics import classification_report, confusion_matrix  
 
-train_data = loadmat('train_32x32_cleaned.mat')
-test_data = loadmat('test_32x32_cleaned.mat')
+train_data = loadmat('train_32x32.mat')
+test_data = loadmat('test_32x32.mat')
 
 lentrain = 73257
-lentest = 26032
+lentest = 5000
 
 X_train = [[] for x in range(lentrain)]
 X_test =  [[] for y in range(lentest)]
@@ -33,10 +33,14 @@ print("Entrainement")
 svclassifier.fit(X_train, Y_train) 
 
 print("Prediction")
-#y_pred = svclassifier.predict(X_test)  
+y_pred = svclassifier.predict(X_test)
 
-accuracy = svclassifier.score(X_test, Y_test)
-print("Accuracy : ", accuracy*100)
+for i in range (10) :
+	print("Image " +str(i)+":")
+	print(str(Y_test[i])+" "+str(y_pred[i])+"\n")
+
+#accuracy = svclassifier.score(X_test, Y_test)
+#print("Accuracy : ", accuracy*100)
 
 # print("Resultats")
 #print(confusion_matrix(Y_test,y_pred))  

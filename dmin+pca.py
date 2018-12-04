@@ -8,8 +8,8 @@ from math import sqrt
 lentrain = 73257
 lentest = 26032
 
-train_pca = np.load('train_pca3000_cleaned.npy')
-test_pca = np.load('test_pca3000_cleaned.npy')
+train_pca = np.load('train_pca100_pretraitement.npy')
+test_pca = np.load('test_pca100_pretraitement.npy')
 
 def generateTrainingData():
 	train_data = loadmat("train_32x32.mat")

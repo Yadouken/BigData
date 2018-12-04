@@ -3,8 +3,8 @@ from scipy.io import loadmat, savemat
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
-train_data = loadmat('train_32x32_cleaned.mat')
-test_data = loadmat('test_32x32_cleaned.mat')
+train_data = loadmat('train_32x32_pretraitement.mat')
+test_data = loadmat('test_32x32_pretraitement.mat')
 
 lentrain = 73257
 lentest = 26032
@@ -21,13 +21,13 @@ for j in range(lentest):
 #Essayer les premières (augemnter n_components) et recueillir les infos dans le rapport
 
 print("Reduction de la dimension en cours")
-pca = PCA(n_components=20)
+pca = PCA(n_components=100)
 train_pca = pca.fit_transform(train_flattened) 
 test_pca = pca.fit_transform(test_flattened) 
 print("PCA finished successfully")
 
-np.save('train_pca3000_cleaned.npy', train_pca)
-np.save('test_pca3000_cleaned.npy', test_pca)
+np.save('train_pca100_pretraitement.npy', train_pca)
+np.save('test_pca100_pretraitement.npy', test_pca)
  
 print("Fichiers sauvegardés")
 

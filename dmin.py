@@ -10,8 +10,8 @@ lentrain = 73257
 lentest = 26032
 
 def generateTrainingData():
-	train_data = loadmat("train_32x32_cleaned.mat")
-	test_data = loadmat("test_32x32_cleaned.mat")
+	train_data = loadmat("train_32x32_pretraitement.mat")
+	test_data = loadmat("test_32x32_pretraitement.mat")
 	return train_data, test_data
 
 '''Calcul de la distance euclidienne entre deux vecteurs RGB 
@@ -72,10 +72,10 @@ if __name__=="__main__":
 	#plt.imshow(train_data["X"][:, :, :, 6])
 	#plt.show()
 	compteur = 0
-	for i in range(lentest):
+	for i in range(lentrain):
 		print('Image ',i)
-		if(DeterminerClasse(test_data["X"][:, :, :, i], representants)==test_data["y"][i][0]):
+		if(DeterminerClasse(train_data["X"][:, :, :, i], representants)==train_data["y"][i][0]):
 			compteur+=1
-	res = (compteur/lentest)*100
+	res = (compteur/lentrain)*100
 	print("Pourcentage d'images bonne classe : ", res)
 
